@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grace | Senior Frontend Architect</title>
+  <link rel="stylesheet" href="/src/styles/theme_blue.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-navy text-slate-light font-sans antialiased">
+  
+  <!-- Navegación Primaria (Sticky) -->
+  <header class="sticky-nav">
+    <nav class="nav-container">
+      <div class="nav-logo">
+        <a href="#inicio" class="text-sky font-bold text-xl tracking-tighter hover:text-ice transition-colors">G.</a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#experiencia-certificaciones" class="nav-item">Experiencia & Certs</a></li>
+        <li><a href="#educacion" class="nav-item">Educación</a></li>
+        <li><a href="#proyectos" class="nav-item">Proyectos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero / Profile Section -->
+    <section id="inicio" class="section-full pt-24 bg-navy">
+      <div class="container section-hero" id="profile-slot">
+        <!-- Datos Inyectados por CSR Engine -->
+      </div>
+    </section>
+
+    <!-- Fusión: Experiencia y Certificaciones en Dos Columnas -->
+    <section id="experiencia-certificaciones" class="section-full bg-alt scroll-mt-nav">
+      <div class="container section-wrapper">
+        <div class="grid-layout-2">
+          <!-- Columna Left -->
+          <div>
+            <h2 class="section-title">Experiencia</h2>
+            <div class="flex-column" id="experience-slot"></div>
+          </div>
+          <!-- Columna Right -->
+          <div>
+            <h2 class="section-title">Certificaciones</h2>
+            <div class="flex-column" id="certifications-slot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="educacion" class="section-full bg-navy scroll-mt-nav">
+      <div class="container section-wrapper">
+        <h2 class="section-title">Educación</h2>
+        <div class="flex-column" id="education-slot"></div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="section-full bg-alt scroll-mt-nav">
+      <div class="container section-wrapper">
+        <h2 class="section-title">Proyectos Destacados</h2>
+        <div class="grid-cols-2" id="projects-slot"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section-full bg-alt">
+    <div class="container section-wrapper">
+      <p class="text-accent" style="text-align: center; font-size: 0.9rem;">
+        Diseño Sistémico bajo principios SOLID y SRP. &copy; 2026.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/app.ts"></script>
+</body>
+</html>

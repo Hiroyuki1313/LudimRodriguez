@@ -1,0 +1,340 @@
+:root {
+  /* Escala Tonal Monocromática Azul - Responsabilidad del Diseño Visual */
+  --color-navy: #0A192F;          /* Fondo base principal */
+  --color-navy-light: #112240;    /* Superficies y cards siempre visibles */
+  --color-navy-lighter: #233554;  /* Bordes y hovers sutiles */
+  
+  --color-slate: #8892b0;         /* Texto secundario */
+  --color-slate-light: #a8b2d1;   /* Texto principal base */
+  --color-slate-lightest: #ccd6f6;/* Títulos y remarcables */
+  --color-ice: #e6f1ff;           /* Blanco matizado, máximo contraste */
+  
+  --color-sky: #64ffda;           /* Acento primario interactivo */
+  --color-sky-tint: rgba(100, 255, 218, 0.1);
+  --color-sky-glow: rgba(100, 255, 218, 0.4); /* Glow effect */
+
+  /* Fluid Design - Escala de espacios y utilidades (Clamp) */
+  --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --spacing-sm: clamp(0.5rem, 1vw, 1rem);
+  --spacing-md: clamp(1rem, 2vw, 2rem);
+  --spacing-lg: clamp(2rem, 4vw, 4rem);
+  --spacing-xl: clamp(4rem, 8vw, 8rem);
+  
+  /* Sistema Tipográfico */
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base-size: clamp(1rem, 1.2vw, 1.125rem);
+  --text-lg: clamp(1.25rem, 2vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 2.5vw, 2rem);
+  --text-title-size: clamp(2.5rem, 5vw, 4rem);
+
+  /* Transiciones y Elevaciones */
+  --transition-smooth: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --shadow-drop: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+  --shadow-glow: 0 0 20px var(--color-sky-glow);
+}
+
+/* Base Reset & Typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-navy);
+  color: var(--color-slate-light);
+  font-family: var(--font-base);
+  font-size: var(--text-base-size);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-sky-tint);
+  color: var(--color-ice);
+}
+
+h1, h2, h3, h4 {
+  color: var(--color-slate-lightest);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.1;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+/* Patrones de Layout Desacoplados (Grid/Flex) */
+.section-full {
+  width: 100%;
+}
+
+.bg-navy {
+  background-color: var(--color-navy);
+}
+
+.bg-alt {
+  background-color: var(--color-navy-light);
+  border-top: 1px solid var(--color-navy-lighter);
+  border-bottom: 1px solid var(--color-navy-lighter);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 5%; /* 5% de margen a cada lado en pantallas móviles */
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Modificadores Grid base (Cartas pequeñas) */
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Layout Estructural 50/50 Desktop, 100 Mobile */
+.grid-layout-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .grid-layout-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Modificadores de espaciado atómicos */
+.pt-24 { padding-top: 6rem; }
+.scroll-mt-nav { scroll-margin-top: 70px; } /* Ajuste exacto para el header sticky */
+.text-accent { color: var(--color-sky); }
+.text-ice { color: var(--color-ice); }
+
+/* --- Navegación Sticky Blanco --- */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95); /* Header Blanco */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-smooth);
+}
+
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem 5%; /* Alineado con el container principal */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo a {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-navy); /* Contraste sobre blanco */
+  letter-spacing: -1px;
+}
+
+.nav-logo a:hover {
+  color: var(--color-sky);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-md);
+  list-style: none;
+}
+
+.nav-item {
+  position: relative;
+  font-size: var(--text-sm);
+  color: var(--color-navy); /* Contraste sobre blanco */
+  font-weight: 600;
+  padding: 0.5rem 0;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-sky);
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover {
+  color: var(--color-sky);
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* --- Secciones Principales --- */
+.section-wrapper {
+  padding: var(--spacing-xl) 5%;
+}
+
+.section-hero {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centrado solicitado */
+  text-align: center; /* Centrado solicitado */
+  padding: 0 5% var(--spacing-xl);
+}
+
+.profile-img-container {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+  border: 3px solid var(--color-sky);
+  box-shadow: var(--shadow-glow); /* Brillo en la foto */
+  flex-shrink: 0;
+}
+
+.profile-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: var(--color-navy-lighter); /* Placeholder color si no hay imagen */
+}
+
+.section-hero h1 {
+  font-size: var(--text-title-size);
+  color: var(--color-ice);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: var(--text-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-ice);
+}
+
+/* Línea lateral en títulos (estilo terminal/IDE) */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-left: 20px;
+  background-color: var(--color-navy-lighter);
+}
+
+/* --- Componentes de Presentación Atómica (Cards Brillantes) --- */
+.card {
+  position: relative;
+  background-color: var(--color-navy-lighter); /* Siempre visibles */
+  padding: var(--spacing-md);
+  border-radius: 12px;
+  transition: var(--transition-smooth);
+  border: 1px solid rgba(255,255,255,0.05); /* Borde sutil */
+  box-shadow: var(--shadow-drop);
+}
+
+/* Glowing Flow y Elevación Intensa en Hover */
+.card:hover {
+  border-color: var(--color-sky);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-8px) scale(1.02); /* Movimiento más pronunciado */
+  z-index: 10;
+}
+
+.card h3 {
+  color: var(--color-ice);
+  font-size: var(--text-lg);
+  transition: var(--transition-smooth);
+}
+
+.card:hover h3 {
+  color: var(--color-sky);
+}
+
+.card p {
+  color: var(--color-slate-light);
+  font-size: var(--text-base-size);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card small {
+  font-family: monospace;
+  color: var(--color-slate);
+  font-size: var(--text-xs);
+  letter-spacing: 0.5px;
+}
+
+/* Estilo de los Chips Tecnológicos */
+.pill {
+  font-family: monospace;
+  font-size: var(--text-xs);
+  padding: 0.35rem 0.85rem;
+  background-color: var(--color-navy);
+  color: var(--color-sky);
+  border-radius: 20px;
+  border: 1px solid var(--color-sky-tint);
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  transition: var(--transition-smooth);
+}
+
+.card:hover .pill {
+  background-color: var(--color-sky-tint);
+  border-color: var(--color-sky);
+}
+
+/* Acción/Botones base */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin-top: var(--spacing-md);
+  font-family: monospace;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-navy);
+  background-color: var(--color-sky);
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--color-sky-glow);
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: var(--color-sky);
+  border: 1px solid var(--color-sky);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
